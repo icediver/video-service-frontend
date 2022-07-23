@@ -1,7 +1,83 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { FaUserCircle } from 'react-icons/fa';
 
-const AuthForms: FC = () => {
-	return <div>AuthForms</div>;
+import { IAuthFields } from '@/components/layout/header/auth-form/auth-form.interface';
+import { validEmail } from '@/components/layout/header/auth-form/auth.valid';
+import Button from '@/components/ui/button/Button';
+import Field from '@/components/ui/field/Field';
+
+import { useOutside } from '@/hooks/useOutside';
+
+import stylesIcon from '../icons-right/IconsRight.module.scss';
+import styles from './AuthForm.module.scss';
+
+const AuthForm: FC = () => {
+	const { ref, setIsShow, isShow } = useOutside(false);
+
+	const [type, setType] = useState<'login' | 'register'>();
+
+	//useActions
+
+	// const {isLoading} = useAuth();
+
+	const {
+		register,
+		formState: { errors },
+		handleSubmit,
+	} = useForm<IAuthFields>({
+		mode: 'onChange',
+	});
+
+	const onSubmit: SubmitHandler<IAuthFields> = data => {
+		// if(type === 'login')
+		// 	else if(type === 'register')
+	};
+
+	return (
+		<div className={styles.wrapper} ref={ref}>
+			<button className={stylesIcon.button} onClick={() => setIsShow(!isShow)}>
+				<FaUserCircle fill='#A4A4A4' />
+			</button>
+
+			{isShow && (
+				<form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+					<Field
+						{...register('email', {
+							required: 'E-mail обязателен',
+							pattern: {
+								value: validEmail,
+								message: 'Не валидный E-mail',
+							},
+						})}
+						placeholder='E-mail'
+						error={errors.email}
+					/>
+					<Field
+						{...register('password', {
+							required: 'Пароль обязателен',
+							minLength: {
+								value: 6,
+								message: 'Мин. длина пароля - 6 символов',
+							},
+						})}
+						placeholder='Пароль'
+						error={errors.email}
+						type='password'
+					/>
+					<div className='mt-5 mb-1 text-center'>
+						<Button onClick={() => setType('login')}>Войти</Button>
+						<button
+							className={styles.register}
+							onClick={() => setType('register')}
+						>
+							Регистрация
+						</button>
+					</div>
+				</form>
+			)}
+		</div>
+	);
 };
 
-export default AuthForms;
+export default AuthForm;
