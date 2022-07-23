@@ -1,6 +1,6 @@
 import type { AppProps } from 'next/app';
 
-import '../app/styless/globals.scss';
+import '../app/styles/globals.scss';
 
 function MyApp({ Component, pageProps }: AppProps) {
 	return <Component {...pageProps} />;
