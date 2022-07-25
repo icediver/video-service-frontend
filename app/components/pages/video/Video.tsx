@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { FC } from 'react';
 
 import Layout from '@/components/layout/Layout';
+import Comments from '@/components/pages/video/comments/Comments';
 import VideoPlayer from '@/components/pages/video/video-player/VideoPlayer';
 
 import { IVideo } from '@/types/video.interface';
@@ -23,7 +24,8 @@ const Video: FC = () => {
 		<Layout title={video.name}>
 			<div className={styles.layout}>
 				<VideoPlayer videoPath={video.videoPath} />
-				{/*<Comments videoId={{video.videoPath} comments={video.comments || []} />*/}
+				<div></div>
+				<Comments videoId={video.id} comments={video.comments || []} />
 			</div>
 			<div className={cn(styles.layout, 'mt-7')}>
 				{/*<VideoDetail video={video} chanel={video.user || ({} as IUser) />} />

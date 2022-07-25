@@ -1,0 +1,31 @@
+.comments {
+	@apply rounded-xl p-5 relative;
+	background-color: #252836;
+	> h2 {
+		@apply text-white text-tiny;
+	}
+	.line {
+		@apply text-white text-tiny;
+	}
+	> p {
+		@apply text-gray-500 mb-4;
+	}
+
+	.commentsItem {
+		@apply mt-7;
+		> div > div > {
+		}
+		div {
+			&:first-child {
+				@apply text-xs;
+			}
+			&:last-child {
+				font-size: 1rem;
+			}
+		}
+	}
+	.bottomForm {
+		@apply absolute bottom-0 left-5;
+		width: calc(100% - 2.5rem);
+	}
+}
