@@ -8,8 +8,11 @@ export const commentApi = api.injectEndpoints({
 			query: body => ({
 				url: `comment`,
 				method: 'POST',
+				body,
 			}),
-			invalidatesTags: () => [{ type: 'Profile' }],
+			invalidatesTags: (result, error, { videoId }) => [
+				{ type: 'Video', id: videoId },
+			],
 		}),
 	}),
 });
