@@ -4,15 +4,15 @@ import { IUser } from '@/types/user.interface';
 
 export interface IVideo extends IBase {
 	name: string;
-	isPublic: boolean;
-	views?: number;
-	likes?: number;
-	duration?: number;
+	isPublic?: boolean;
+	views: number;
+	likes: number;
+	duration: number;
 	description: string;
 	videoPath: string;
 	thumbnailPath: string;
-	user: IUser;
-	comments: IComment[];
+	user?: IUser;
+	comments?: IComment[];
 }
 
 export interface IVideoDto

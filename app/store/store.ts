@@ -11,6 +11,8 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
+import { api } from '@/store/api/api';
+import { rtkQueryErrorLogger } from '@/store/middlewares/error.middleware';
 import { rootReducer } from '@/store/root-reducer';
 
 const persistConfig = {
@@ -27,7 +29,9 @@ export const store = configureStore({
 			serializableCheck: {
 				ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
 			},
-		}),
+		})
+			.concat(rtkQueryErrorLogger)
+			.concat(api.middleware),
 });
 export const persistor = persistStore(store);
 

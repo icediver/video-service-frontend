@@ -4,10 +4,16 @@ import { FC } from 'react';
 
 import Menu from '@/components/layout/sidebar/ menu/Menu';
 
+import { useAuth } from '@/hooks/useAuth';
+
+import { api } from '@/store/api/api';
+
 import styles from './Sidebar.module.scss';
 
 const Sidebar: FC = () => {
-	//TODO get profile
+	const { user } = useAuth();
+
+	const { data, isLoading } = api.useGetPtofileQuery(null, { skip: !user });
 
 	return (
 		<aside className={styles.sidebar}>
@@ -15,6 +21,18 @@ const Sidebar: FC = () => {
 				<a className={styles.logo}>Rutube 2.0</a>
 			</Link>
 			<Menu title='Меню' items={menu} />
+			{user && (
+				<Menu
+					title='Мои подписки'
+					items={
+						data?.subscriptions.map(({ toChannel }) => ({
+							image: toChannel.avatarPath,
+							title: toChannel.name,
+							link: '/c/' + toChannel.id,
+						})) || []
+					}
+				/>
+			)}
 			<div className={styles.copy}>© 2022 RUTUBE 2.0</div>
 		</aside>
 	);
