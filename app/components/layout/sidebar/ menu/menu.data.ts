@@ -21,6 +21,6 @@ export const menu: IMenuItem[] = [
 	{
 		title: 'Мои подписки',
 		icon: HiCollection,
-		link: '/subscription',
+		link: '/subscriptions',
 	},
 ];

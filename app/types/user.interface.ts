@@ -5,12 +5,12 @@ export interface IUser extends IBase {
 	email: string;
 	name: string;
 	isVerified?: boolean;
-	subscribersCount?: number;
+	subscribersCount: number;
 	description: string;
 	avatarPath: string;
 	videos?: IVideo[];
 	subscriptions: ISubscription[];
 }
 export interface ISubscription extends IBase {
-	toChanel: IUser;
+	toChannel: IUser;
 }
